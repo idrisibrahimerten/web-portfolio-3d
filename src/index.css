@@ -1,0 +1,72 @@
+/* Importing fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+
+
+body {
+  background: linear-gradient(135deg, #1a2236 0%, #004e92 100%);
+  color: #f3f4f6; /* Hafif açık gri, modern ve okunaklı */
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  transition: background 0.5s;
+}
+
+/* Başlıklar için (gerekirse) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #fff; /* Başlıklar için ekstra parlak beyaz */
+}
+
+/* Accent vurgular için */
+a, .accent {
+  color: #00ffd0; /* Neon cyan vurgulu link/ikon */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover, .accent:hover {
+  color: #facc15; /* Sarı vurgulu hover */
+}
+
+/* Örnek buton/primary için */
+.button, button {
+  background: linear-gradient(90deg, #00c6fb 0%, #005bea 100%);
+  color: #1a2236;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 600;
+  padding: 0.75em 2em;
+  letter-spacing: 1px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+.button:hover, button:hover {
+  background: linear-gradient(90deg, #facc15 0%, #00ffd0 100%);
+  color: #22223b;
+  transform: translateY(-2px) scale(1.02);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  max-width: 1536px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(26, 34, 54, 0.8);
+}
