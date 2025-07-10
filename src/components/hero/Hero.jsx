@@ -1,9 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 import "./hero.css";
-import Speech from "./Speech"; // Assuming you will update the content within the Speech component
+import Speech from "./Speech";
 import { motion } from "framer-motion";
 import Shape from "./Shape";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 
 const awardVariants = {
   initial: {
@@ -35,6 +35,140 @@ const followVariants = {
   },
 };
 
+// Animasyonlu kod bloğu komponenti
+const CodeAnimation = () => {
+  const [displayedCode, setDisplayedCode] = useState("");
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+
+  const codeLines = [
+    "const developer = {",
+    "  name: 'İdris İbrahim ERTEN',",
+    "  role: 'Software Developer',",
+    "  skills: ['Python', 'Node.js', 'React', 'API'],",
+    "};",
+    "",
+    "function createAmazingProjects() {",
+    "  return developer.skills.map(skill => {",
+    "    return `${skill} + creativity = success`;",
+    "  });",
+    "}",
+    "",
+    "// Ready to build something great?",
+    "createAmazingProjects();",
+  ];
+
+  useEffect(() => {
+    if (currentLineIndex < codeLines.length) {
+      const currentLine = codeLines[currentLineIndex];
+      
+      if (currentCharIndex < currentLine.length) {
+        const timer = setTimeout(() => {
+          setDisplayedCode(prev => prev + currentLine[currentCharIndex]);
+          setCurrentCharIndex(prev => prev + 1);
+        }, 30);
+        
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => {
+          setDisplayedCode(prev => prev + '\n');
+          setCurrentLineIndex(prev => prev + 1);
+          setCurrentCharIndex(0);
+        }, 200);
+        
+        return () => clearTimeout(timer);
+      }
+    } else {
+      // Kod tamamlandıktan sonra tekrar başla
+      const timer = setTimeout(() => {
+        setDisplayedCode("");
+        setCurrentLineIndex(0);
+        setCurrentCharIndex(0);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [currentLineIndex, currentCharIndex, codeLines]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 0.8, scale: 1 }}
+      transition={{ duration: 1.5 }}
+      className="code-animation"
+      style={{
+        position: 'absolute',
+        top: '20%',
+        left: '40%',
+        transform: 'translate(-50%, -50%)',
+        width: '500px',
+        height: '600px',
+        background: 'rgba(0, 0, 0, 0.9)',
+        borderRadius: '15px',
+        padding: '30px',
+        fontFamily: 'monospace',
+        fontSize: '14px',
+        color: '#00ff41',
+        overflow: 'hidden',
+        zIndex: 0,
+        border: '2px solid rgba(0, 255, 65, 0.5)',
+        backdropFilter: 'blur(10px)',
+        boxShadow: '0 0 30px rgba(0, 255, 65, 0.2)',
+      }}
+    >
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        marginBottom: '10px',
+        borderBottom: '1px solid rgba(0, 255, 65, 0.3)',
+        paddingBottom: '10px'
+      }}>
+        <div style={{ 
+          width: '12px', 
+          height: '12px', 
+          borderRadius: '50%', 
+          backgroundColor: '#ff5f57',
+          marginRight: '8px' 
+        }}></div>
+        <div style={{ 
+          width: '12px', 
+          height: '12px', 
+          borderRadius: '50%', 
+          backgroundColor: '#ffbd2e',
+          marginRight: '8px' 
+        }}></div>
+        <div style={{ 
+          width: '12px', 
+          height: '12px', 
+          borderRadius: '50%', 
+          backgroundColor: '#28ca42',
+          marginRight: '15px' 
+        }}></div>
+        <span style={{ color: '#666', fontSize: '10px' }}>developer.js</span>
+      </div>
+      <pre style={{ 
+        margin: 0, 
+        whiteSpace: 'pre-wrap',
+        lineHeight: '1.4'
+      }}>
+        {displayedCode}
+        <motion.span
+          animate={{ opacity: [0, 1] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+          style={{ 
+            color: '#00ff41',
+            backgroundColor: '#00ff41',
+            width: '2px',
+            display: 'inline-block'
+          }}
+        >
+          |
+        </motion.span>
+      </pre>
+    </motion.div>
+  );
+};
+
 const Hero = () => {
   return (
     <div className="hero">
@@ -48,7 +182,7 @@ const Hero = () => {
         >
           Hello There,
           <br />
-          <span>I'm İdris İbrahim <br /> ERTEN!</span> {/* Name updated */}
+          <span>I'm İdris İbrahim <br /> ERTEN!</span>
         </motion.h1>
         {/* AWARDS / ACHIEVEMENTS */}
         <motion.div
@@ -58,15 +192,12 @@ const Hero = () => {
           className="awards"
         >
           <motion.h2 variants={awardVariants}>
-            Award-Winning Full Stack Developer
-          </motion.h2> {/* Title updated based on CV */}
+            Award-Winning Software Developer
+          </motion.h2>
           <motion.p variants={awardVariants}>
-            Delivering award-winning web & mobile solutions for 4+ years.
-            Versatile Full-Stack Developer with a track record in Digital
+            Versatile Software Developer with a track record in Digital
             transformation.
-          </motion.p> {/* Description updated based on CV */}
-
-
+          </motion.p>
         </motion.div>
         {/* SCROLL SVG */}
         <motion.a
@@ -115,19 +246,15 @@ const Hero = () => {
           className="follow"
         >
           <motion.a variants={followVariants} href="https://github.com/idrisibrahimerten" target="_blank" rel="noopener noreferrer">
-            <img src="/github.png" alt="GitHub" /> {/* GitHub icon */}
+            <img src="/github.png" alt="GitHub" />
           </motion.a>
-          {/* Replace with your actual LinkedIn profile URL */}
           <motion.a variants={followVariants} href="https://linkedin.com/in/idrisibrahimerten" target="_blank" rel="noopener noreferrer">
-            <img src="/linkedin-icon.png" alt="LinkedIn" /> {/* LinkedIn icon */}
+            <img src="/linkedin-icon.png" alt="LinkedIn" />
           </motion.a>
-          {/* Add other professional platform icons if needed, e.g., Medium, Stack Overflow */}
           <motion.div variants={followVariants} className="followTextContainer">
-            <div className="followText">CONNECT WITH ME</div> {/* Text updated */}
+            <div className="followText">CONNECT WITH ME</div>
           </motion.div>
         </motion.div>
-        {/* BUBBLE - Ensure the Speech component content is updated by you */}
-        {/* Example Speech content: "Developing scalable and effective software solutions that add value for clients." */}
         <Speech />
         {/* CERTIFICATE / ACHIEVEMENTS */}
         <motion.div
@@ -135,7 +262,7 @@ const Hero = () => {
           transition={{ duration: 1 }}
           className="certificate"
         >
-          <img src="/certificate.png" alt="Certificate Icon" /> {/* Generic certificate icon or icon for your most prominent certificate */}
+          <img src="/certificate.png" alt="Certificate Icon" />
           TDG "Coder in Action" 1st Place
           <br />
           AWS Certified
@@ -162,7 +289,6 @@ const Hero = () => {
             }}
           >
             <svg viewBox="0 0 200 200" width="150" height="150">
-              {/* This fill color will be overridden by the CSS in hero.css */}
               <circle cx="100" cy="100" r="90" fill="var(--contact-button-color, #4DD0E1)" />
               <path
                 id="innerCirclePath"
@@ -170,12 +296,12 @@ const Hero = () => {
                 d="M 100,100 m -60,0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0"
               />
               <text className="circleText">
-                <textPath href="#innerCirclePath">HIRE NOW •</textPath> {/* Text updated */}
+                <textPath href="#innerCirclePath">HIRE NOW •</textPath>
               </text>
               <text className="circleText">
                 <textPath href="#innerCirclePath" startOffset="44%">
                   LET'S DISCUSS YOUR PROJECT •
-                </textPath> {/* Text updated */}
+                </textPath>
               </text>
             </svg>
             <div className="arrow">
@@ -185,7 +311,7 @@ const Hero = () => {
                 width="50"
                 height="50"
                 fill="none"
-                stroke="black" // Arrow color can be black or a dark color from your palette
+                stroke="black"
                 strokeWidth="2"
               >
                 <line x1="6" y1="18" x2="18" y2="6" />
@@ -196,14 +322,10 @@ const Hero = () => {
         </motion.a>
       </div>
       <div className="bg">
-        {/* 3d */}
-        <Canvas>
-          <Suspense fallback="loading...">
-            <Shape />
-          </Suspense>
-        </Canvas>
+        {/* Animasyonlu kod bloğu - Shape yerine */}
+        <CodeAnimation />
         <div className="hImg">
-          <img src="/hero.png" alt="İdris İbrahim Erten" /> {/* Meaningful alt text */}
+          <img src="/hero.png" alt="İdris İbrahim Erten" style={{ position: 'relative', zIndex: 2 }} />
         </div>
       </div>
     </div>
