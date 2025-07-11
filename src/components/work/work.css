@@ -1,0 +1,172 @@
+:root {
+  --gap: 20px;
+}
+
+/* Genel Kök Stil */
+.work-root {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 60px 24px 0;
+  color: #ECF0F1;
+}
+.work-title {
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #ECF0F1;
+}
+.work-underline {
+  margin: 0 auto 80px;
+}
+
+/* Timeline Container */
+.timeline-horizontal-new {
+  position: relative;
+  width: 90%;
+  margin: 195px auto 50px;
+  min-height: calc(350px + var(--gap) * 2);
+  overflow: visible;
+  transform: scale(0.85);
+  transform-origin: top center;
+}
+
+/* Ana çizgi */
+.timeline-line-new {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 3.5px;
+  background: linear-gradient(90deg, #4DD0E1 10%, #2C3E50 100%);
+  border-radius: 4px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Kartlar - Sabit boyut */
+.timeline-card-new {
+  position: absolute;
+  top: 50%;
+  left: var(--card-left);
+  width: 360px;
+  height: 290px;
+  background: #2C3E50;
+  border-radius: 15px;
+  box-shadow: 0 6px 36px rgba(0,0,0,0.4);
+  padding: 20px;
+  border: 1.5px solid #4DD0E1;
+  color: #ECF0F1;
+  overflow: visible;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+.timeline-card-new.top {
+  transform: translate(-50%, calc(-100% - var(--gap)));
+}
+.timeline-card-new.bottom {
+  transform: translate(-50%, var(--gap));
+}
+.timeline-card-new:hover.top {
+  transform: translate(-50%, calc(-100% - var(--gap) - 8px));
+}
+.timeline-card-new:hover.bottom {
+  transform: translate(-50%, calc(var(--gap) + 8px));
+}
+
+/* Kart içi metin stil ve kesme */
+.timeline-date-new { color: #FFD54F; font-size: 1.08rem; font-weight: 600; margin-bottom: 6px; }
+.timeline-job-title-new { font-size: 1.2rem; font-weight: bold; margin-bottom: 4px; }
+.timeline-company-new { font-size: 1rem; color: #BDC3C7; margin-bottom: 6px; }
+.timeline-location-new { color: #4DD0E1; font-size: 0.95rem; }
+
+/* Liste stili */
+.timeline-desc-new {
+  color: #BDC3C7;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  padding-left: 1.2em;
+  max-height: 150px;
+  overflow: hidden;
+  list-style-type: disc;
+  list-style-position: inside;
+  margin: 0 0 40px;
+}
+.timeline-desc-new li {
+  margin-bottom: 0.5em;
+}
+
+/* Devamını Oku Butonu */
+.read-more-button {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  color: #4DD0E1;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 3;
+}
+
+/* Modal - Açılır/Kapanır Animasyon ve Scroll */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease forwards;
+  z-index: 1000;
+}
+.modal-overlay.closing { animation: fadeOut 0.2s ease forwards; }
+
+.modal-content {
+  background: #2C3E50;
+  padding: 24px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideDown 0.3s ease forwards;
+}
+.modal-content.closing { animation: slideUp 0.2s ease forwards; }
+.modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: transparent;
+  border: none;
+  color: #ECF0F1;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Override modal içindeki liste scroll */
+.modal-content .timeline-desc-new {
+  max-height: none;
+  overflow: visible;
+  padding-bottom: 1em;
+}
+.modal-content ul {
+  list-style-position: inside;
+}
+
+/* Animasyon Keyframes */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-20px); opacity: 0; } }
+
+/* Responsive Düzenlemeler */
+@media (max-width: 1100px) {
+  .timeline-card-new { width: 300px; height: 280px; }
+}
+@media (max-width: 900px) {
+  .timeline-horizontal-new { display: flex; flex-direction: column; align-items: center; transform: none; margin: 50px auto 0; width: 100%; }
+  .timeline-line-new { display: none; }
+  .timeline-card-new { position: static; width: 90%; max-width: 400px; margin: 20px auto; transform: none !important; left: auto; }
+}
+@media (max-width: 500px) {
+  .timeline-card-new { width: 90%; height: auto; }
+  .timeline-desc-new { max-height: 120px; }
+  .work-title { font-size: 1.8rem; }
+}

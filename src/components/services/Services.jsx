@@ -1,8 +1,6 @@
-import "./services.css";
-
 const Services = () => {
   return (
-    <div className='services'>Services</div>
+    <div className=''>Services</div>
   )
 }
 

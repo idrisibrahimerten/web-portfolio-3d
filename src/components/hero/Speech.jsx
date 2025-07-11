@@ -17,7 +17,7 @@ const Speech = () => {
             1500, // Bekleme süresi
             "Leading teams and scaling products.", // Liderlik ve ürün ölçeklendirme
             1500, // Bekleme süresi
-            "Expert in Python, Node.js, React, API", // Anahtar teknolojiler
+            "Expert in Python, Node.js, FastAPI, Django, React, API Development", // Anahtar teknolojiler
             1500, // Bekleme süresi
             "Bridging innovation with reliable code.", // İnovasyon ve güvenilirlik
             1500, // Bekleme süresi

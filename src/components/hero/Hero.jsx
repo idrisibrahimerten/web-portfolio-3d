@@ -45,7 +45,7 @@ const CodeAnimation = () => {
     "const developer = {",
     "  name: 'İdris İbrahim ERTEN',",
     "  role: 'Software Developer',",
-    "  skills: ['Python', 'Node.js', 'React', 'API'],",
+    "  skills: ['Python', 'Node.js', 'FastAPI', 'Django', 'React', 'Next.js', 'MongoDB', 'PostgreSQL', 'Redis', 'TensorFlow', 'Docker', 'AWS'],",
     "};",
     "",
     "function createAmazingProjects() {",
@@ -265,7 +265,7 @@ const Hero = () => {
           <img src="/certificate.png" alt="Certificate Icon" />
           TDG "Coder in Action" 1st Place
           <br />
-          AWS Certified
+          
         </motion.div>
         {/* CONTACT BUTTON */}
         <motion.a
